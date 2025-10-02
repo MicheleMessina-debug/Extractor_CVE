@@ -1,0 +1,40 @@
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: <nome>
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - ./init_db.sql:/docker-entrypoint-initdb.d/init_db.sql:ro
+    ports:
+      - "<portnumber>:<portnumber>"
+
+  redis:
+    image: redis:7
+    ports:
+      - "<portnumber>:<portnumber>"
+
+  api:
+    build: ./api
+    depends_on: ["db","redis"]
+    environment:
+      DATABASE_URL: postgresql://postgres:password@db:<portnumber>/<nome>
+      SECRET_KEY: supersecretkey
+    ports:
+      - "<portnumber>:<portnumber>"
+    volumes:
+      - ./api:/app
+
+  worker:
+    build: ./worker
+    depends_on: ["db","redis"]
+    environment:
+      DATABASE_URL: postgresql://postgres:password@db:<portnumber>/<nome>
+      SECRET_KEY: supersecretkey
+      POLL_INTERVAL: "3600"
+    volumes:
+      - ./worker:/app
+
+volumes:
+  db-data:

@@ -1,0 +1,12 @@
+fastapi
+uvicorn[standard]
+asyncpg
+aiohttp
+python-dateutil
+apscheduler
+python-multipart
+passlib[bcrypt]
+pyjwt
+psycopg2-binary
+python-dotenv
+bcrypt
