@@ -1,4 +1,4 @@
-** Database e dashboard di CVE per analisi vulnerabilità **
+**Database e dashboard di CVE per analisi vulnerabilità**
 
 Questa versione monta `init_db.sql` dentro il container Postgres usando `/docker-entrypoint-initdb.d/`,
 quindi il database viene inizializzato automaticamente al primo avvio senza comandi manuali.
