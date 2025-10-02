@@ -1,6 +1,19 @@
 Questa versione monta `init_db.sql` dentro il container Postgres usando `/docker-entrypoint-initdb.d/`,
 quindi il database viene inizializzato automaticamente al primo avvio senza comandi manuali.
 
+Il progetto deve avere i file inseriti nella propria cartella in questo modo:
+init_db.sql
+docker-compose.yml
+requirements.txt
+api/
+    main.py
+    Dockerfile
+    requirements.txt
+worker/
+    worker.py
+    Dockerfile
+    requirements.txt
+    
 Come avviarlo (dev):
 1. Build and start with docker-compose:
    ```
